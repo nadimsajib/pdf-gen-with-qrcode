@@ -98,26 +98,58 @@ class Panel extends Admin_Controller {
 		$this->mPageTitle = 'Admin User Groups';
 		$this->render_crud();
 	}
-
 	
 	// Admin User Groups CRUD
 	public function pdf_gen()
 	{
+		$crud = $this->generate_crud('ins_lists');
+		$crud->set_subject('Insurance');
+		//$crud->add_action('Photos', '', '','ui-icon-image',array($this,'view_pdf'));
+		//$crud->add_action('Photos', '', '','fa fa-repeat',array($this,'view_pdf'));
+		$crud->field_type('destination','dropdown',
+            array(
+				'SULTANATE OF OMAN' => 'SULTANATE OF OMAN', 
+				'KINGDOM OF SAUDI ARABIA' => 'KINGDOM OF SAUDI ARABIA',
+				'UNITED ARAB EMIRATES' => 'UNITED ARAB EMIRATES' , 
+				'KINGDOM OF BAHRAIN' => 'KINGDOM OF BAHRAIN' , 
+				'STATE OF QATAR' => 'STATE OF QATAR' , 
+				'STATE OF KUWAIT' => 'STATE OF KUWAIT' , 
+				'STATE OF MALAYSIA' => 'STATE OF MALAYSIA' , 
+				'STATE OF ROMANIA' => 'STATE OF ROMANIA'
+			));
+		//$crud->field_type('home_country', 'readonly');
+		$crud->field_type('date','invisible');
+		$crud->field_type('policy_no','invisible');
+		$crud->callback_before_insert(array($this,'policy_no_callback'));
+		$crud->add_action('More', '', $this->mModule.'/panel/view_pdf','fa fa-file-pdf-o');
+		$this->mPageTitle = 'PDF Gen';
+		$this->render_crud();
+	}
+	function policy_no_callback($post_array, $primary_key = null)
+	{
+		$query = $this->db->query("SELECT * FROM ins_lists ORDER BY id DESC LIMIT 1");
+		$result = $query->result_array();
+		if(isset($result[0]) && !empty($result[0]['policy_no'])){
+			$post_array['policy_no'] = $result[0]['policy_no']+1;
+		}else{
+			$post_array['policy_no'] = 153000+1;
+		}
+		return $post_array;
+	}
+	public function view_pdf($row)
+	{
+		$this->load->model('ins_list');
+		$data['ins_list'] = $this->ins_list->get($row);
 		$this->load->library('pdf');
-		$url = base_url().'panel/admin_user_group';
-
-// quick and simple:
-$data['image'] = '<img src="'.(new QRCode)->render($url).'" alt="QR Code" />';
-		
+		$url = base_url().'admin/panel/view_pdf/'.$data['ins_list']->id;
+		// quick and simple:
+		$data['image'] = '<img src="'.(new QRCode)->render($url).'" alt="QR Code" />';
 		$html = '<link rel="stylesheet" href="'.base_url().'assets/dist/frontend/bootstrap.min.css" />';
 		$html .= $this->load->view('GeneratePdfView', $data, true);
 		//echo $html;exit;
-        $this->pdf->createPDF($html, 'mypdf', false);
+        $this->pdf->createPDF($html, str_replace(' ', '_', $data['ins_list']->full_name), false);
 		print_r($html);
 		exit;
-		$crud = $this->generate_crud('ins_list');
-		$this->mPageTitle = 'PDF Gen';
-		$this->render_crud();
 	}
 
 	// Admin User Reset password

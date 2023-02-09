@@ -58,7 +58,6 @@ body {
 
 .sub-child-two {
     background-color: #dddddd;
-    font-size: 12px;
     padding: 10px;
 }
 
@@ -71,8 +70,9 @@ body {
 }
 
 .text-one p {
-    font-size: 9px;
+    font-size: 8.5px;
     color: #7f7f7f;
+    margin: 0px;
 }
 
 .bold-700 {
@@ -80,13 +80,13 @@ body {
 }
 
 /* table */
-table {
+.tb {
     border-collapse: collapse;
     width: 100%;
 }
 
-td,
-th {
+.tb td,
+.tb th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 2px;
@@ -94,9 +94,29 @@ th {
     font-weight: 700;
 }
 
-tr:nth-child(odd) {
+.tb tr:nth-child(odd) {
     background-color: #dddddd;
 }
+
+.bg-color {
+    background-color: #dddddd;
+    border: 6px solid #ffffff;
+    text-align: left;
+    padding: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+.bg-color-footer {
+    background-color: #dddddd;
+    border: 6px solid #ffffff;
+    text-align: left;
+    padding: 6px;
+    font-size: 8px;
+    font-weight: 600;
+}
+.bold {
+    font-weight: bold;
+  }
 
 .text-one-black p {
     color: #000;

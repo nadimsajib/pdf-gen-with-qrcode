@@ -1,53 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta charset="utf-8">
-    <title>Create PDF from View in CodeIgniter Example</title>
-    <link href="<?php echo base_url(); ?>assets/dist/frontend/bootstrap.min.css" type="text/css" rel="stylesheet" />
-</head>
-<body>
-<img src="<?php echo base_url(); ?>assets/dist/images/logo.png" alt="" >
-<h1 class="text-center bg-info">Generate PDF from View using DomPDF</h1>
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Book Name</th>
-            <th>Author</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>PHP and MySQL for Dynamic Web Sites</td>
-            <td>Larry Ullman</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Pro MEAN Stack Development</td>
-            <td>Elad Elrom</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Restful API Design</td>
-            <td>Matthias Biehl</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Pro PHP MVC</td>
-            <td>Chris Pitt</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Mastering Spring MVC 4</td>
-            <td>Geoffroy Warin</td>
-        </tr>
-        <tbody>
-</table>
-</body>
-</html> -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,85 +12,98 @@
     </head>
 
     <body>
-        <div class="container">
-            <div class="logo" style="margin-bottom: 15px;">
+        <div class="">
+            <div style="margin-bottom: 15px;  ">
                 <img src="<?php echo base_url(); ?>assets/dist/images/logo.png" alt="" style="width: 150px;"/>
             </div>
             <div class="title" style="text-align: center;margin-bottom: 15px;">
-                <h4>TRAVEL INSURANCE CERTIFICATE</h4>
+                <h4 class="bold">TRAVEL INSURANCE CERTIFICATE</h4>
             </div>
-            
-            <div class="parent" style="display: flex;flex-wrap: wrap;gap: 10px;">
-                <div class="child" style="flex: 1 0 21%;font: 12px;">
-                    <div class="sub-child-one">
-                        <p>POLICY NO : <span>WC-152496</span></p>
-                    </div>
+            <table style="width: 100%;border-collapse: collapse;font-size: 11px;font-weight: 700;">
+                <tr>
+                    <td class="bold">
+                        POLICY NO : <span>WC- <?php echo $ins_list->policy_no; ?></span>
+                    </td>
+                    <td class="bold">
+                    <p>ISSUE DATE : <span><?php echo date('d/m/Y',strtotime($ins_list->date)); ?></span></p>
+                    </td>
+                    <td class="bold">
+                    <p>PLAN : <span>COVID PLAN </span></p>
+                    </td>
+                    <td class="bold">
+                    <p>AGENT : <span>NATIONAL</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">DESTINATION</p>
-                        <p class="list-content">SULTANATE OF OMAN</p>
+                        <p class="list-content"><span class="bold"><?php echo $ins_list->destination; ?></span></p>
                     </div>
-                </div>
-                <div class="child">
-                    <div class="sub-child-one">
-                        <p>ISSUE DATE : <span>09/11/2022</span></p>
-                    </div>
+                </td>
+                    <td class="bg-color">
                     <div class="sub-child-two">
-                        <div class="form">
+                    <table>
+                            <tr>
+                            <td><p>From</p>
+                                <p class="form-date"><span class="bold"><?php echo date('d/m/Y',strtotime($ins_list->effective_date)). "                 "; ?></span></p></td>
+                            <td>
+                                <div style="width: 5px;">
+
+                                </div>
                             <div>
-                                <p>From</p>
-                                <p class="form-date">26/10/2022</p>
+                            <p>To</p>
+                            <p class="form-date"><span class="bold"><?php echo "    ".date('d/m/Y',strtotime("+1 month", strtotime($ins_list->effective_date))); ?></span></p></td>
                             </div>
-                            <div>
-                                <p>To</p>
-                                <p class="form-date">26/11/2022</p>
-                            </div>
-                        </div>
+                            </tr>
+                        </table>  
                     </div>
-                </div>
-                <div class="child">
-                    <div class="sub-child-one">
-                        <p>PLAN : <span>COVID PLAN (OMAN)</span></p>
-                    </div>
+                    </td>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">COUNTRY OF RESIDENCE</p>
-                        <p class="list-content">BANGLADESH</p>
+                        <p class="list-content"><span class="bold"><?php echo $ins_list->home_country; ?></span></p>
                     </div>
-                </div>
-                <div class="child">
-                    <div class="sub-child-one">
-                        <p>AGENT : <span>NATIONAL</span></p>
-                    </div>
+                    </td>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">TELEPHONE NO</p>
-                        <p class="list-content">+966567795308</p>
+                        <p class="list-content"><span class="bold"><?php echo $ins_list->phone; ?></span></p>
                     </div>
-                </div>
-                <div class="child">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">FULL NAME</p>
-                        <p class="list-content">Nadimul Haque Sajib</p>
+                        <p class="list-content"><span class="bold"><?php echo $ins_list->full_name; ?></span></p>
                     </div>
-                </div>
-                <div class="child">
+                    </td>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">DATE OF BIRTH</p>
-                        <p class="list-content">04/12/1990</p>
+                        <p class="list-content"><span class="bold"><?php echo date('d/m/Y',strtotime($ins_list->date_of_birth));?></span></p>
                     </div>
-                </div>
-                <div class="child">
+                    </td>
+                    <td class="bg-color">
                     <div class="sub-child-two">
                         <p class="list-title">PASSPORT NUMBER</p>
-                        <p class="list-content">EK0359008</p>
+                        <p class="list-content"><span class="bold"><?php echo $ins_list->passport_no; ?></span></p>
                     </div>
-                </div>
-            </div>
+                    </td>
+                    <td></td>
+                    
+                </tr>
+            </table>
+            
+            
             <div class="text-one">
                 <p>Contrary to any stipulations stated in the General Conditions,the plan subscribed to,under this Letter of Confirmation, covers exclusively the below mentioned Benefits.</p>
                 <p>Limitations & Excesses shown in the table hereafter.</p>
                 <p>The General Conditions form an integral part of this Letter of Confirmation.</p>
                 <p><span class="bold-700">For more info/modification regarding your policy,</span> kindly do not hesitate to contact your authorized agent or e-mail us on enquiry@wecare-center.com</p>
             </div>
-            <table>
+            <table class="tb">
                 <tr>
                     <td>BENEFITS</td>
                     <td>SUM INSURED</td>
@@ -215,24 +178,35 @@
                 <p style="color: #000; font-size: 10px;">
                     <u><strong>Confirmation Code</strong></u>
                 </p>
+                <?php echo $image; ?>
                 <div class="bar-code">
-                    <?php echo $image; ?>
+                    
                 </div>
             </div>
             <div class="footer">
-                <div class="footer-one">
-                    <p>
-                        PLEASE KEEP THIS LETTER OF CONFIRMATION WITH YOU AT ALL TIMES Claims must be reported within 48 hours from occurrence of the event and all related original documents must be submitted to the Company by the
-                        beneficiary within four (4) months maximum.
-                    </p>
-                </div>
-                <div class="footer-two">
-                    <p>
-                        in case of emergency or claims of assistance,call us on: <a href="tel:+919511458978">+91 95 11 45 89 78</a> or <a class="tel:+918756542370">+91 87 56 54 23 70</a> or send e-mail to:
-                        <a href="mailto:claims@wecare-center.com">claims@wecare-center.com</a> You will be asked to provide the reference of this letter and/or show this document. This purchase is non-refundable.Please refer to your
-                        receipt.
-                    </p>
-                </div>
+                <table>
+                    <tr>
+                        <td class="bg-color-footer">
+                        <div class="">
+                                <p>
+                                    PLEASE KEEP THIS LETTER OF CONFIRMATION WITH YOU AT ALL TIMES Claims must be reported within 48 hours from occurrence of the event and all related original documents must be submitted to the Company by the
+                                    beneficiary within four (4) months maximum.
+                                </p>
+                        </div>
+                        </td>
+                        <td class="bg-color-footer">
+                        <div class="">
+                                <p>
+                                    in case of emergency or claims of assistance,call us on: <a href="tel:+919511458978">+91 95 11 45 89 78</a> or <a class="tel:+918756542370">+91 87 56 54 23 70</a> or send e-mail to:
+                                    <a href="mailto:claims@wecare-center.com">claims@wecare-center.com</a> You will be asked to provide the reference of this letter and/or show this document. This purchase is non-refundable.Please refer to your
+                                    receipt.
+                                </p>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                
             </div>
         </div>
     </body>

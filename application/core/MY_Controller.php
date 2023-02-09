@@ -140,10 +140,15 @@ class MY_Controller extends MX_Controller {
 	{
 		if ( !$this->ion_auth->logged_in() )
 		{
-			if ( $redirect_url==NULL )
-				$redirect_url = $this->mConfig['login_url'];
+			if (strpos(current_url(), '/panel/view_pdf') !== false) {
+				//print_r(current_url());exit;
+			}else{
+				if ( $redirect_url==NULL )
+					$redirect_url = $this->mConfig['login_url'];
 
-			redirect($redirect_url);
+				redirect($redirect_url);
+			}
+			
 		}
 	}
 

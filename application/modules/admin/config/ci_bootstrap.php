@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['ci_bootstrap'] = array(
 
 	// Site name
-	'site_name' => 'Admin Panel',
+	'site_name' => 'Insurance',
 
 	// Default page title prefix
 	'page_title_prefix' => '',
@@ -64,7 +64,7 @@ $config['ci_bootstrap'] = array(
 			'url'		=> '',
 			'icon'		=> 'fa fa-home',
 		),
-		'user' => array(
+		/*'user' => array(
 			'name'		=> 'Users',
 			'url'		=> 'user',
 			'icon'		=> 'fa fa-users',
@@ -73,25 +73,25 @@ $config['ci_bootstrap'] = array(
 				'Create'		=> 'user/create',
 				'User Groups'	=> 'user/group',
 			)
-		),
+		),*/
 		'panel' => array(
 			'name'		=> 'Admin Panel',
 			'url'		=> 'panel',
 			'icon'		=> 'fa fa-cog',
 			'children'  => array(
-				'Admin Users'			=> 'panel/admin_user',
-				'Create Admin User'		=> 'panel/admin_user_create',
-				'Admin User Groups'		=> 'panel/admin_user_group',
+				'Create PDF'			=> 'panel/pdf_gen',
+				//'Create Admin User'		=> 'panel/admin_user_create',
+				//'Admin User Groups'		=> 'panel/admin_user_group',
 			)
 		),
-		'util' => array(
+		/*'util' => array(
 			'name'		=> 'Utilities',
 			'url'		=> 'util',
 			'icon'		=> 'fa fa-cogs',
 			'children'  => array(
 				'Database Versions'		=> 'util/list_db',
 			)
-		),
+		),*/
 		'logout' => array(
 			'name'		=> 'Sign Out',
 			'url'		=> 'panel/logout',
@@ -103,7 +103,7 @@ $config['ci_bootstrap'] = array(
 	'login_url' => 'admin/login',
 
 	// Restricted pages
-	'page_auth' => array(
+	/*'page_auth' => array(
 		'user/create'				=> array('webmaster', 'admin', 'manager'),
 		'user/group'				=> array('webmaster', 'admin', 'manager'),
 		'panel'						=> array('webmaster'),
@@ -115,7 +115,7 @@ $config['ci_bootstrap'] = array(
 		'util/backup_db'			=> array('webmaster'),
 		'util/restore_db'			=> array('webmaster'),
 		'util/remove_db'			=> array('webmaster'),
-	),
+	),*/
 
 	// AdminLTE settings
 	'adminlte' => array(
@@ -130,21 +130,21 @@ $config['ci_bootstrap'] = array(
 	// Useful links to display at bottom of sidemenu
 	'useful_links' => array(
 		array(
-			'auth'		=> array('webmaster', 'admin', 'manager', 'staff'),
+			'auth'		=> array('admin', 'manager', 'staff'),
 			'name'		=> 'Frontend Website',
 			'url'		=> '',
 			'target'	=> '_blank',
 			'color'		=> 'text-aqua'
 		),
 		array(
-			'auth'		=> array('webmaster', 'admin'),
+			'auth'		=> array( 'admin'),
 			'name'		=> 'API Site',
 			'url'		=> 'api',
 			'target'	=> '_blank',
 			'color'		=> 'text-orange'
 		),
 		array(
-			'auth'		=> array('webmaster', 'admin', 'manager', 'staff'),
+			'auth'		=> array('admin', 'manager', 'staff'),
 			'name'		=> 'Github Repo',
 			'url'		=> CI_BOOTSTRAP_REPO,
 			'target'	=> '_blank',
